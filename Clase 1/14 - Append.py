@@ -1,5 +1,5 @@
 numbers = [1,2,3,4,5]
-
+print(numbers)
 # Append
 
 numbers.append(6)
@@ -8,7 +8,7 @@ print(numbers)
 # Insert
 
 numbers.insert(1,2)
-print(numbers)
+print('INSERT',numbers)
 
 # Remove
 
