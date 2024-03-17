@@ -71,7 +71,7 @@ value = input('elija un numero: ')
 is_number = value.replace('.','').isdigit()
 
 if is_number == True:
-    
+        
     print('Si es un valor numerico')
     
     if '.' in value:

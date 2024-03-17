@@ -10,7 +10,7 @@ print(numbers)
 numbers.insert(1,2)
 print('INSERT',numbers)
 
-# Remove
+# Remove    
 
 numbers.remove(2)
 
