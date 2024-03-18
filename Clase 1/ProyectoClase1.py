@@ -13,15 +13,15 @@ estudiantes = [estudiante]
 ciclo = True
 while ciclo:
 
-    seleccion = int(input('''
+    seleccion = input('''
                           Gestion de estudiante universitario.
                           Seleccione la seccion:
                           1. Listado de estudiantes.
                           2. Registrar estudiante.
                           3. Actualizar estudiante.
                           4. Eliminar estudiante.
-                          5. Salir\n''')) 
-    if seleccion == 1:
+                          5. Salir\n''')
+    if seleccion == '1':
         print('------------------------------------------')
         print('Listado de estudiantes:\n')
        # for i in estudiante:
@@ -36,7 +36,7 @@ while ciclo:
             
         
 
-    elif seleccion == 2 :
+    elif seleccion == '2' :
         print('------------------------------------------')
         print('Registrar estudiante ') 
         
@@ -63,14 +63,22 @@ while ciclo:
         
         estudiantes.append(nuevo_estudiante)
         
-    elif seleccion == 3 :
+    elif seleccion == '3' :
         print('------------------------------------------')
         print('Actualizar estudiante:')
         
-    elif seleccion == 4 :
+        cedulaComp = input('Ingrese la cedula del estudiante: ')
+        
+        ''' if  estudiantes[estudiante['cedula']]  cedulaComp:
+            print('correcto')    
+        else :
+            print('No coincide la cedula ')
+        '''
+        # estudiantes[len(estudiantes)-1] = cedulaComp
+    elif seleccion == '4' :
         print('------------------------------------------')
         print('Eliminar estudiante:')
-    elif seleccion == 5 :
+    elif seleccion == '5' :
         break
     else :
         print('El dato ingresado no esta dentro de las opciones, ingrese otro: ')
