@@ -108,13 +108,13 @@ while ciclo:
             elif '.' in nota_2:
                 
                     nota_2 = float(nota_2)
-                    validacion = True
+                    validacion2 = True
                     is_number = None
                     
             elif ',' in nota_2:
                 
                     nota_2 = float(nota_2)
-                    validacion = True
+                    validacion2 = True
                     is_number = None
             else:   
                 
@@ -136,13 +136,13 @@ while ciclo:
             elif '.' in nota_3:
                 
                     nota_3 = float(nota_3)
-                    validacion = True
+                    validacion3 = True
                     is_number = None
                     
             elif ',' in nota_3:
                 
                     nota_3 = float(nota_3)
-                    validacion = True
+                    validacion3 = True
                     is_number = None
                     
             else:
@@ -248,13 +248,13 @@ while ciclo:
                     elif '.' in nota_2_Act:
                         
                             nota_2_Act = float(nota_2_Act)
-                            validacion = True
+                            validacion2 = True
                             is_number = None
                             
                     elif ',' in nota_2_Act:
                         
                             nota_2_Act = float(nota_2_Act)
-                            validacion = True
+                            validacion2 = True
                             is_number = None
                     else:   
                         
@@ -276,14 +276,14 @@ while ciclo:
                     elif '.' in nota_3_Act:
                         
                         nota_3_Act = float(nota_3_Act)
-                        validacion = True
+                        validacion3 = True
                         is_number = None
                             
                     elif ',' in nota_3_Act:
                         
-                            nota_3_Act = float(nota_3_Act)
-                            validacion = True
-                            is_number = None
+                        nota_3_Act = float(nota_3_Act)
+                        validacion3 = True
+                        is_number = None
                             
                     else:
                         
@@ -304,8 +304,10 @@ while ciclo:
                 
         
     elif seleccion == '4' :
+        
         print('------------------------------------------')
         print('Eliminar estudiante:')
+        
     elif seleccion == '5' :
         break
     else :
