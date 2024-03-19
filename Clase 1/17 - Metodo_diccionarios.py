@@ -25,7 +25,7 @@ print(developer)
 
 # Update agregar
 
-developer.update({'is_senior':True})
+developer.update({'is_senior':False})
 print(developer)
 
 # Remover

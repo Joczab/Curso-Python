@@ -13,9 +13,17 @@ estudiante = {
 
 estudiantes = [estudiante]
 
-ciclo = True
-while ciclo:
 
+ciclo = True
+
+while ciclo:
+    validacion  = False
+    validacion2 = False
+    validacion3 = False
+    valCedula   = False
+    valNombre   = False
+    valApellido = False
+    is_number = None
     seleccion = input('''
                           Gestion de estudiante universitario.
                           Seleccione la seccion:
@@ -40,17 +48,22 @@ while ciclo:
         print('Registrar estudiante ') 
         
         nombre = input('Ingrese el nombre: ')
-        '''while nombre != str:
-            nombre = input('el nombre no es valido, ingreselo nuevamente: ')'''
-            
+                
         apellido = input('Ingrese el apellido: ')
         
-        cedula = int(input('Ingrese la cedula: '))
-        
-      
-        validacion = False
-        validacion2 = False
-        validacion3 = False
+        while valCedula == False:
+            
+            cedula = input('Ingrese la cedula: ')
+            is_number= cedula.replace('.','').isdigit()
+            
+            if is_number == True:
+                
+                cedula = int(cedula)
+                valCedula = True
+            else:
+                cedula = None
+                print('El dato ingresado es incorrecto, vuelva a ingresar: ')
+           
         
         # Validacion para que los numeros ingresados sean numeros enteros o flotantes, no strings
         
@@ -75,6 +88,7 @@ while ciclo:
                 nota_1 = float(nota_1)
                 validacion = True
                 is_number = None
+                
             else:
                 
                 nota_1 = None
@@ -87,6 +101,7 @@ while ciclo:
             is_number = nota_2.replace('.','').isdigit()
             
             if is_number == True:
+                
                 nota_2 = float(nota_2)
                 validacion2 = True
                 
@@ -102,17 +117,19 @@ while ciclo:
                     validacion = True
                     is_number = None
             else:   
+                
                     nota_2 = None
-                    
                     print('El dato ingresado es incorrecto, vuelva a ingresar: ')
                     
         
         while validacion3 == False:
+            
             nota_3 = input('Ingrese la tercera nota: ')
             
             is_number = nota_3.replace('.','').isdigit()
             
             if is_number == True:
+                
                 nota_3 = float(nota_3)
                 validacion3 = True
                 
@@ -127,7 +144,9 @@ while ciclo:
                     nota_3 = float(nota_3)
                     validacion = True
                     is_number = None
+                    
             else:
+                
                     nota_3 = None
                     print('El dato ingresado es incorrecto, vuelva a ingresar: ')
            
@@ -142,18 +161,148 @@ while ciclo:
         estudiantes.append(nuevo_estudiante)
         
     elif seleccion == '3' :
+        
         print('------------------------------------------')
         print('Actualizar estudiante:')
-        
-        cedulaComp = int(input('Ingrese la cedula del estudiante: '))
+
+        while valCedula == False:
+            
+            cedulaComp = input('Ingrese la cedula del estudiante: ')
+            is_number= cedulaComp.replace('.','').isdigit()
+            
+            if is_number == True:
+                
+                cedulaComp = int(cedulaComp)
+                valCedula = True
+                
+            else:
+                
+                cedulaComp = None
+                print('El dato ingresado es incorrecto, vuelva a ingresar: ')
         
         for estudiante in estudiantes:
+        
             if  estudiante['cedula'] ==  cedulaComp:
-                print('correcto')    
-            elif estudiante ['cedula'] != cedulaComp:
-                print('No coincide la cedula ')
                 
-        # estudiantes[len(estudiantes)-1] = cedulaComp
+                print('Coincide la cedula ')
+                
+                nombre_Act = input('Ingrese el nombre: ')
+                
+                apellido_Act  = input('Ingrese el apellido: ')
+                
+                valCedula = False
+                while valCedula == False:
+                    
+                    cedula_Act = input('Ingrese la cedula: ')
+                    is_number = cedula_Act.replace('.','').isdigit()
+                    
+                    if is_number == True:
+                        
+                        cedula_Act  = int(cedula_Act)
+                        valCedula = True
+                    else:
+                        cedula_Act  = None
+                        print('El dato ingresado es incorrecto, vuelva a ingresar: ')
+                
+                
+                # Validacion para que los numeros ingresados sean numeros enteros o flotantes, no strings
+                
+                while validacion == False: 
+                    
+                    nota_1_Act  = input('Ingrese la primera nota: ')
+                    is_number = nota_1_Act.replace('.','').isdigit()
+                    
+                    if is_number == True:
+                        
+                        nota_1_Act = float(nota_1_Act)
+                        validacion = True
+                        
+                    elif '.' in nota_1_Act:
+                        
+                        nota_1_Act = float(nota_1_Act)
+                        validacion = True
+                        is_number = None
+                        
+                    elif ',' in nota_1_Act:
+                        
+                        nota_1_Act = float(nota_1_Act)
+                        validacion = True
+                        is_number = None
+                        
+                    else:
+                        
+                        nota_1_Act = None
+                        print('El dato ingresado es incorrecto, vuelva a ingresar: ')
+                
+                
+                while validacion2 == False:
+                        
+                    nota_2_Act = input('Ingrese la segunda nota: ')
+                    is_number = nota_2_Act.replace('.','').isdigit()
+                    
+                    if is_number == True:
+                        
+                        nota_2_Act = float(nota_2_Act)
+                        validacion2 = True
+                        
+                    elif '.' in nota_2_Act:
+                        
+                            nota_2_Act = float(nota_2_Act)
+                            validacion = True
+                            is_number = None
+                            
+                    elif ',' in nota_2_Act:
+                        
+                            nota_2_Act = float(nota_2_Act)
+                            validacion = True
+                            is_number = None
+                    else:   
+                        
+                            nota_2_Act = None
+                            print('El dato ingresado es incorrecto, vuelva a ingresar: ')
+                    
+        
+                while validacion3 == False:
+            
+                    nota_3_Act = input('Ingrese la tercera nota: ')
+                
+                    is_number = nota_3_Act.replace('.','').isdigit()
+                
+                    if is_number == True:
+                    
+                        nota_3_Act = float(nota_3_Act)
+                        validacion3 = True
+                    
+                    elif '.' in nota_3_Act:
+                        
+                        nota_3_Act = float(nota_3_Act)
+                        validacion = True
+                        is_number = None
+                            
+                    elif ',' in nota_3_Act:
+                        
+                            nota_3_Act = float(nota_3_Act)
+                            validacion = True
+                            is_number = None
+                            
+                    else:
+                        
+                            nota_3_Act = None
+                            print('El dato ingresado es incorrecto, vuelva a ingresar: ')
+                
+                promedio_Act = round(float(float( nota_1_Act + nota_2_Act + nota_3_Act )/3),2)
+            
+                # nuevo diccionario con los datos ingresados
+            
+                nuevo_estudiante_Act = {'name': nombre_Act,'lastname':apellido_Act,'cedula':cedula_Act,'nota 1': nota_1_Act,'nota 2':nota_2_Act,'nota 3':nota_3_Act, 'promedio':promedio_Act} 
+                nuevo_estudiante.update(nuevo_estudiante_Act)
+                # y agregar el nuevo diccionario a la lista de estudiantes1
+                break
+            
+            else:
+                pass
+                
+        
     elif seleccion == '4' :
         print('------------------------------------------')
         print('Eliminar estudiante:')

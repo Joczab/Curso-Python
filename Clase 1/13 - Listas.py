@@ -17,4 +17,4 @@ print(numbers)
 # Cortes
 
 # print (numbers[posicion comenzando de 0: posicion de longitud])
-print (numbers[0:2])
+print (numbers[0:3])
