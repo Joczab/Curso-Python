@@ -63,7 +63,7 @@ while ciclo:
         while valCedula == False:
             
             cedula = input('Ingrese la cedula:\n')
-            is_number= cedula.replace('.','').isdigit()
+            is_number= cedula.replace('.',' ').isdigit()
             
             if is_number == True:
                 
