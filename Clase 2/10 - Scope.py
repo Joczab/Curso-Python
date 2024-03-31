@@ -19,7 +19,7 @@ def obtener_un_numero():
     
     return 10
 
-# random_number esta en un spoce local(funcuion)
+# random_number esta en un spoce local(funcion)
 # print(random_number)
 
 obtener_un_numero()

@@ -1,7 +1,7 @@
 usuarios = [
     {
         'username': 'username 1',
-        'status': True
+        'status': False
     },
     {
         'username': 'username 2',
@@ -9,7 +9,7 @@ usuarios = [
     },
     {
         'username': 'username 3',
-        'status': True
+        'status': False
     }
 ]
 

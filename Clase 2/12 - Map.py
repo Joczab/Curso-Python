@@ -8,7 +8,7 @@ usuarios = [
         'active' : False
     }
 ]
-
+print(usuarios)
 def cambio_status(usuario):
     usuario['active'] = True
     return usuario
