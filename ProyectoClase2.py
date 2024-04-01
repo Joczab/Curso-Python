@@ -1,19 +1,20 @@
 '''Proyecto en Python sobre elaborar una aplicación de tareas pendientes que le permita al usuario gestionar sus tareas'''
-
+from datetime import date
+from datetime import datetime
 dic_tareas = [
     {
         'codigo': '123',
         'titulo':'Aprender Python',
         'descripcion': 'Prueba de los diccionarios',
         'status' : 'Completado' , #status = Completada o Pendiente        
-        'fecha_de_creacion' : '27-04-2003'#DD-MM-YYYY
+        'fecha_de_creacion' : date(2003,4,27) #DD-MM-YYYY
     },
     {
         'codigo': '456',
         'titulo':'Aprender un libro',
         'descripcion': 'Prueba de los diccionarios',
         'status' : 'Pendiente' , #status = Completada o Pendiente     
-        'fecha_de_creacion' : '23-01-2003'#DD-MM-YYYY
+        'fecha_de_creacion' : date(2003,1,23) #DD-MM-YYYY
     }
 ]
 
@@ -77,6 +78,30 @@ def lista_tareas_titulo(titulo):
                 
     else:
         print('No se han encontrado tareas que coincidan.')
+
+#funcion de filtrado por fecha
+def lista_tareas_fecha():
+    
+    tareas_fecha = [fecha for fecha in dic_tareas if fecha['fecha_de_creacion'] == fecha_seleccionada]
+    for index,fecha in enumerate(tareas_fecha,1):
+        print('------------------------------------------')
+        print(f'Tarea N: {index}.')
+        print()
+        for key,value in fecha.items():
+            print(f'{key.capitalize()}: {value}')
+    print('------------------------------------------')
+    print()
+
+def validar_numero(numero):
+    is_number = numero.isdigit()
+    if is_number == True:
+        return True
+    else:
+        numero = None
+        print('El dato ingresado es incorrecto, vuelva a ingresar\n')
+        
+
+        
             
 def codigo_no_rep(codigo): # creo q es asi
     codigo_val = lambda codigo: False if codigo == ['codigo'] else True
@@ -89,7 +114,7 @@ def titulo_no_vacio(titulo):
 while ciclo:
     
     esmanzana = True
-    
+    filtro = None
     seleccion = input('''
                       Gestor de tareas:
 
@@ -135,25 +160,20 @@ while ciclo:
                 match filtro:
                     
                     case '1':
-                        
-                        valcodigo = True
-                        while valcodigo:
+                        valCodigo = True
+                        while valCodigo:
                             
                             print('Filtrar Por Código\n')
-                            codigo_seleccionado = input('Ingrese El Código:\n')
-                            is_number = codigo_seleccionado.isdigit()
-                                
-                            if is_number == True:
-                                    
-                                    codigo_seleccionado == int(codigo_seleccionado)
-                                    lista_tareas_codigo(codigo_seleccionado)
-                                    print()
-                                    valcodigo = False
-                                    
+                            codigo_seleccionado = input('Ingrese El Código:\n')    
+                            
+                            if validar_numero(codigo_seleccionado) == True:
+                                lista_tareas_codigo(codigo_seleccionado)
+                                print()
+                                valCodigo = False
                             else:
-                                    
-                                    codigo_seleccionado = None
-                                    print('El dato ingresado es incorrecto, vuelva a ingresar\n')
+                                pass
+                            
+                            
                             
                     case '2':
                         
@@ -165,7 +185,6 @@ while ciclo:
                             
                             if titulo_no_vacio(titulo_seleccionado):
                                 
-                                print('hola')
                                 lista_tareas_titulo(titulo_seleccionado)
                                 valTitulo = False
                                 
@@ -174,7 +193,21 @@ while ciclo:
                                 print('El Título ingresado no es valido, vuelva a ingresar:\n')
                                 
                     case '3':
-                        pass
+                        valFecha = True
+                        while valFecha:
+                            print('Filtrar Por Fecha:')
+                            dia = int(input('ingrese el dia de la fecha:\n'))
+                            mes = int(input('ingrese el mes de la tarea:\n'))
+                            año = int(input('ingrese el año de la tarea:\n'))
+                            
+                            if (validar_numero(dia) and validar_numero(mes) and validar_numero(año)) == True:
+                                
+                                fecha_seleccionada = date(año,mes,dia)
+                                lista_tareas_fecha()
+                                valFecha = True
+                            else :
+                                pass
+                            
                     case '4':
                         esmanzana = False
                     case _:

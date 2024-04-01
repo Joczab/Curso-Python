@@ -37,6 +37,6 @@ print(numbers)
 # Sort
 
 numbers_a = [1,10,8,6,11]
-# numbers_a.sort(reverse=True)
+numbers_a.sort(reverse=True)
 numbers_a.sort()
 print(numbers_a)
