@@ -92,50 +92,78 @@ def lista_tareas_fecha():
     print('------------------------------------------')
     print()
 
-#funcion para validar que sea un numero
-def validar_numero(numero):
-    try:
-        int(numero)
-        return True
-    except ValueError:
-        return False       
-    
+
 #funcion para validar que la fecha sea numerica 
 def ingresar_fecha():
     while True:
         
-        dia = input("Ingrese el día: ")
-        mes = input("Ingrese el mes: ")
-        año = input("Ingrese el año: ")
+        dia = input("Ingrese el día:\n")
+        mes = input("Ingrese el mes:\n")
+        año = input("Ingrese el año:\n")
         
         if validar_numero(dia) and validar_numero(mes) and validar_numero(año):
             return  date(int(año), int(mes), int(dia))
         else:
-            print("Por favor, ingrese valores numéricos para día, mes y año.")
-        
-        
-    
-
+            print("Por favor, ingrese valores numéricos para día, mes y año.\n")
         
 #funcion para que el codigo no sea repetido
-def codigo_no_rep(codigo): # creo q es asi
-    codigo_val = lambda codigo: False if codigo == ['codigo'] else True
-    return codigo_val
+def codigo_no_rep(codigo): 
+    for tarea in dic_tareas:
+        if tarea['codigo'] == codigo:
+            return False
+    return True
+    
 
 #funcion para que el titulo sea vacio
-def titulo_no_vacio(titulo):
-        
+def dato_no_vacio(titulo):
     if len(titulo.strip()) > 0 and len(titulo) <= 20:
         return True                 
     else:
-        titulo = input('El Título ingresado no es valido, vuelva a ingresar:\n')
-    
+        print ('El Título ingresado no es valido, vuelva a ingresar.\n')
 
+#funcion para validar que sea un numero
+
+def validar_numero(numero):
+    return ' '.join(numero.split()).isdigit()
+    
+    
 #funcion para verificar que la id no se repita
 def validar_codigo(codigo):
-    pass
-    
 
+    if not validar_numero(codigo):
+        return False, 'El codigo tiene que ser numerico.\n'
+    if not codigo_no_rep(codigo):
+        return False, 'El codigo ya esta en uso, ingrese otro diferente.\n'
+    return True, None
+
+#funcion para verificar la descripcion
+def validar_desc(desc):
+    if len(desc.strip()) > 0:
+        return True
+    else:
+        print('La descripcion ingresada no puede estar vacia, vuelva a ingresar\n')
+#funcion para añadir tareas
+def añadir_tarea():
+    
+    verificar_codigo = False
+    while not verificar_codigo:
+        codigo = input('Ingrese el codigo:\n')
+        verificar_codigo, mensaje = validar_codigo(codigo)
+        if mensaje is not None:
+            print(mensaje)
+        
+    verificar_titulo = False
+    while not verificar_titulo :
+        titulo = input('Ingrese el Título:\n')    
+        if dato_no_vacio(titulo) == True: verificar_titulo = True
+    
+    verificar_desc = False
+    while not verificar_desc:
+        desc = input('Ingrese la Descripción:\n')
+        if validar_desc(desc) == True: verificar_desc = True
+    
+       
+            
 while ciclo:
     
     esmanzana = True
@@ -206,7 +234,7 @@ while ciclo:
                             print('Filtrar Por Título\n')
                             titulo_seleccionado = input('Ingrese el Título:\n')
                             
-                            titulo_no_vacio(titulo_seleccionado)
+                            dato_no_vacio(titulo_seleccionado)
                                 
                             lista_tareas_titulo(titulo_seleccionado)
                             
@@ -228,6 +256,7 @@ while ciclo:
             print('------------------------------------------')
             print('Añadir Tareas:')
             
+            añadir_tarea()
             
         case '4':
             print('------------------------------------------')
