@@ -1,6 +1,6 @@
 '''Proyecto en Python sobre elaborar una aplicación de tareas pendientes que le permita al usuario gestionar sus tareas'''
 from datetime import date
-from datetime import datetime
+
 dic_tareas = [
     {
         'codigo': '123',
@@ -92,25 +92,50 @@ def lista_tareas_fecha():
     print('------------------------------------------')
     print()
 
+#funcion para validar que sea un numero
 def validar_numero(numero):
-    is_number = numero.isdigit()
-    if is_number == True:
+    try:
+        int(numero)
         return True
-    else:
-        numero = None
-        print('El dato ingresado es incorrecto, vuelva a ingresar\n')
+    except ValueError:
+        return False       
+    
+#funcion para validar que la fecha sea numerica 
+def ingresar_fecha():
+    while True:
         
+        dia = input("Ingrese el día: ")
+        mes = input("Ingrese el mes: ")
+        año = input("Ingrese el año: ")
+        
+        if validar_numero(dia) and validar_numero(mes) and validar_numero(año):
+            return  date(int(año), int(mes), int(dia))
+        else:
+            print("Por favor, ingrese valores numéricos para día, mes y año.")
+        
+        
+    
 
         
-            
+#funcion para que el codigo no sea repetido
 def codigo_no_rep(codigo): # creo q es asi
     codigo_val = lambda codigo: False if codigo == ['codigo'] else True
     return codigo_val
 
+#funcion para que el titulo sea vacio
 def titulo_no_vacio(titulo):
-    return len(titulo.strip()) > 0 and len(titulo) <= 20
+        
+    if len(titulo.strip()) > 0 and len(titulo) <= 20:
+        return True                 
+    else:
+        titulo = input('El Título ingresado no es valido, vuelva a ingresar:\n')
     
+
+#funcion para verificar que la id no se repita
+def validar_codigo(codigo):
+    pass
     
+
 while ciclo:
     
     esmanzana = True
@@ -177,36 +202,21 @@ while ciclo:
                             
                     case '2':
                         
-                        valTitulo = True
-                        while valTitulo:
                             
                             print('Filtrar Por Título\n')
                             titulo_seleccionado = input('Ingrese el Título:\n')
                             
-                            if titulo_no_vacio(titulo_seleccionado):
+                            titulo_no_vacio(titulo_seleccionado)
                                 
-                                lista_tareas_titulo(titulo_seleccionado)
-                                valTitulo = False
-                                
-                            else:
-                                
-                                print('El Título ingresado no es valido, vuelva a ingresar:\n')
+                            lista_tareas_titulo(titulo_seleccionado)
+                            
                                 
                     case '3':
-                        valFecha = True
-                        while valFecha:
+                        
                             print('Filtrar Por Fecha:')
-                            dia = int(input('ingrese el dia de la fecha:\n'))
-                            mes = int(input('ingrese el mes de la tarea:\n'))
-                            año = int(input('ingrese el año de la tarea:\n'))
                             
-                            if (validar_numero(dia) and validar_numero(mes) and validar_numero(año)) == True:
-                                
-                                fecha_seleccionada = date(año,mes,dia)
-                                lista_tareas_fecha()
-                                valFecha = True
-                            else :
-                                pass
+                            fecha_seleccionada = ingresar_fecha()
+                            lista_tareas_fecha()
                             
                     case '4':
                         esmanzana = False
@@ -217,6 +227,8 @@ while ciclo:
         case '3':
             print('------------------------------------------')
             print('Añadir Tareas:')
+            
+            
         case '4':
             print('------------------------------------------')
             print('Actualizar Tareas:')
