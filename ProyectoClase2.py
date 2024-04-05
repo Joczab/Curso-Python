@@ -193,7 +193,138 @@ def añadir_tarea():
     }
     
     dic_tareas.append(tareas)
+#funcion para ingresar el codigo para despues actualizar
+
     
+def ref_tarea(codigo_buscar, task_key_update, nueva_tarea):
+    for tarea in dic_tareas:
+        if tarea['codigo'] == codigo_buscar:
+            tarea[task_key_update] = nueva_tarea
+            break
+        
+#funcion para verificar que la tarea existe
+def existe_tarea(codigo_buscar):
+    if len(dic_tareas) > 0:
+        tarea_existe = [tarea for tarea in dic_tareas if tarea['codigo'] == codigo_buscar]
+        if tarea_existe is not None:
+            return True, 'Tarea encontrada.'
+    return False, 'Tarea no encontrada'
+
+#funcion para nuevo codigo
+def nuevo_codigo(codigo_buscar):
+    verificar_nuevo_codigo = False
+    while not verificar_nuevo_codigo:
+        nuevo_codigo = input('Ingrese el nuevo codigo:\n')
+        verificar_nuevo_codigo, mensaje = validar_codigo(nuevo_codigo)
+        if mensaje is not None:
+            print(mensaje)
+    
+    map(ref_tarea(codigo_buscar,'codigo',nuevo_codigo),dic_tareas)
+    print('El codigo fue actualizado.\n')
+
+#funcion para nuevo titulo
+def nuevo_titulo(codigo_buscar):
+    verificar_nuevo_titulo = False
+    while not verificar_nuevo_titulo:
+        nuevo_titulo = input('Ingrese el nuevo titulo:\n')
+        verificar_nuevo_titulo = dato_no_vacio(nuevo_titulo)
+    map(ref_tarea(codigo_buscar,'titulo',nuevo_titulo),dic_tareas)
+    print('El titulo fue actualizado.\n')
+    
+#funcion para nueva descripcion
+def nueva_desc(codigo_buscar):
+    verificar_nueva_desc = False
+    while not verificar_nueva_desc:
+        nueva_desc = input('Ingrese la nueva descripcion:\n')
+        verificar_nueva_desc = validar_desc(nueva_desc)
+    map(ref_tarea(codigo_buscar,'descripcion',nueva_desc),dic_tareas)
+    print('La descripcion fue actualizada.\n')
+    
+#funcion para nuevo status
+def nuevo_status(codigo_buscar):
+    verificar_nuevo_status = False
+    while not verificar_nuevo_status:
+         nuevo_status = input('Ingrese nuevo status(completado o pendiente):\n')
+         verificar_nuevo_status = validar_status(nuevo_status)
+    map(ref_tarea(codigo_buscar,'status',nuevo_status),dic_tareas)
+    print('El status fue actualizado.\n')  
+
+#funcion para nueva fecha
+def nueva_fecha(codigo_buscar):
+    verificar_nueva_fecha = False
+    while not verificar_nueva_fecha:
+        verificar_nueva_fecha = ingresar_fecha()
+    map(ref_tarea(codigo_buscar,'fecha',nueva_fecha),dic_tareas)
+    print('La fecha fue actualizada.\n')        
+
+#funcion de menu para actualizar tareas
+def menu_actualizar_tarea(codigo_buscar):
+        encontrado, mensaje = existe_tarea(codigo_buscar)
+        if encontrado:
+            print(mensaje)
+        else:
+            print(mensaje)
+            
+        ejecutar=True    
+        while ejecutar and encontrado == True:
+            
+            print('------------------------------------------') 
+            print('1.- Actualizar codigo.')
+            print('2.- Actualizar titulo.')
+            print('3.- Actualizar descripcion.')
+            print('4.- Actualizar status.')
+            print('5.- Actualizar fecha.')
+            print('6.- Atras.')
+            selec_act = input('Seleccione una opcion: ')
+            match (selec_act):
+                
+                case '1': 
+                    print('------------------------------------------')
+                    nuevo_codigo(codigo_buscar)
+                case '2': 
+                    print('------------------------------------------')
+                    nuevo_titulo(codigo_buscar)
+                case '3': 
+                    print('------------------------------------------')
+                    nueva_desc(codigo_buscar)
+                case '4': 
+                    print('------------------------------------------')
+                    nuevo_status(codigo_buscar)
+                case '5': 
+                    print('------------------------------------------')
+                    nueva_fecha(codigo_buscar)
+                case '6': 
+                        ejecutar = False 
+                        encontrado = False
+                case _ : 
+                        print('------------------------------------------')
+                        print('El dato ingresado no esta dentro de las opciones, ingrese otro:\n')
+            
+#funcion para actualizar tareas
+def actualizar_tarea():
+    verificar_codigo = False
+    while not verificar_codigo:
+        codigo_buscar = input('Ingrese el codigo de la tarea a actualizar: ')
+        verificar_codigo = validar_numero(codigo_buscar)
+        print('------------------------------------------')
+        menu_actualizar_tarea(codigo_buscar)
+        
+def borrar_tareas():
+    tarea_eliminada = False
+    verficar_codigo = False
+    while not verficar_codigo:
+        codigo_borrar = input('Ingrese el codigo de la tarea a eliminar:\n')
+        verficar_codigo = validar_numero(codigo_borrar)
+    for tarea in dic_tareas:
+        if tarea['codigo'] == codigo_borrar:
+            dic_tareas.pop(dic_tareas.index(codigo_borrar))
+            tarea_eliminada = True
+            
+    if tarea_eliminada:
+        print('La tarea fue eliminada.\n')
+    else:
+        print('No se encontro, vuelva a intentarlo.\n')
+        
 while ciclo:
     
     esmanzana = True
@@ -291,9 +422,11 @@ while ciclo:
         case '4':
             print('------------------------------------------')
             print('Actualizar Tareas:')
+            actualizar_tarea()
         case '5':
             print('------------------------------------------')
             print('Eliminar Tareas:')
+            borrar_tareas()
         case '6':
             print('------------------------------------------')
             print('Finalizando el programa')
