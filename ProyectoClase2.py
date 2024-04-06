@@ -186,9 +186,9 @@ def añadir_tarea():
     
     tareas = {
         'codigo': codigo,
-        'titulo': titulo,
-        'descripcion': desc,
-        'status' : status ,         
+        'titulo': titulo.capitalize(),
+        'descripcion': desc.capitalize(),
+        'status' : status.capitalize(),         
         'fecha_de_creacion' : fecha 
     }
     
@@ -310,16 +310,21 @@ def actualizar_tarea():
         menu_actualizar_tarea(codigo_buscar)
         
 def borrar_tareas():
-    tarea_eliminada = False
+    
     verficar_codigo = False
     while not verficar_codigo:
         codigo_borrar = input('Ingrese el codigo de la tarea a eliminar:\n')
         verficar_codigo = validar_numero(codigo_borrar)
+        
+    tarea_eliminada = False
     for tarea in dic_tareas:
+        
         if tarea['codigo'] == codigo_borrar:
-            dic_tareas.pop(dic_tareas.index(codigo_borrar))
-            tarea_eliminada = True
             
+            dic_tareas.pop(dic_tareas.index(tarea))
+            tarea_eliminada = True
+            break
+        
     if tarea_eliminada:
         print('La tarea fue eliminada.\n')
     else:
