@@ -348,6 +348,7 @@ while ciclo:
     match seleccion:
         
         case '1':
+            
             print('------------------------------------------')
             print('Lista de Tareas:\n')
             
@@ -356,13 +357,21 @@ while ciclo:
                 filtro = input('Para filtrar las tareas seleccione \n1 Completadas \n2 Pendientes \n3 Menu Principal\n ')
             
                 match filtro:
+                    
                     case '1':
+                        
                         lista_tareas_completadas()
+                        
                     case '2':
+                        
                         lista_tareas_pendientes()
+                        
                     case '3':
+                        
                         esmanzana = False
+                        
                     case _:
+                        
                         print('------------------------------------------')
                         print('El dato ingresado no esta dentro de las opciones, ingrese otro:\n')
                         
@@ -379,6 +388,7 @@ while ciclo:
                 match filtro:
                     
                     case '1':
+                        
                         valCodigo = True
                         while valCodigo:
                             
@@ -392,28 +402,23 @@ while ciclo:
                             else:
                                 pass
                             
-                            
-                            
                     case '2':
                         
-                            
                             print('Filtrar Por Título\n')
                             titulo_seleccionado = input('Ingrese el Título:\n')
-                            
                             dato_no_vacio(titulo_seleccionado)
-                                
                             lista_tareas_titulo(titulo_seleccionado)
-                            
                                 
                     case '3':
                         
                             print('Filtrar Por Fecha:')
-                            
                             fecha_seleccionada = ingresar_fecha()
                             lista_tareas_fecha()
                             
                     case '4':
+                        
                         esmanzana = False
+                        
                     case _:
                         print('------------------------------------------')
                         print('El dato ingresado no esta dentro de las opciones, ingrese otro:\n')
@@ -421,17 +426,18 @@ while ciclo:
         case '3':
             print('------------------------------------------')
             print('Añadir Tareas:')
-            
             añadir_tarea()
             
         case '4':
             print('------------------------------------------')
             print('Actualizar Tareas:')
             actualizar_tarea()
+            
         case '5':
             print('------------------------------------------')
             print('Eliminar Tareas:')
             borrar_tareas()
+            
         case '6':
             print('------------------------------------------')
             print('Finalizando el programa')
