@@ -20,8 +20,9 @@ dic_tareas = [
 
 ciclo = True
 
-#funcion de tareas completadas
+
 def lista_tareas_completadas():
+    '''Funcion de tareas completadas'''
     print('------------------------------------------')
     print('Tareas Completadas:')
     tareas_completadas = [tarea for tarea in dic_tareas if tarea['status'] == 'Completado']
@@ -34,8 +35,8 @@ def lista_tareas_completadas():
     print('------------------------------------------')
     print()
         
-#funcion de tareas pendientes
 def lista_tareas_pendientes():
+    '''Funcion de tareas pendientes'''
     print('------------------------------------------')
     print('Tareas Pendientes:')
     tareas_pendientes = [tarea for tarea in dic_tareas if tarea['status'].capitalize() == 'Pendiente']
@@ -49,8 +50,8 @@ def lista_tareas_pendientes():
     print('------------------------------------------')
     print()
         
-#funcion de filtrado por codigo
 def lista_tareas_codigo(num):
+    '''Funcion de filtrado por codigo'''
     print('------------------------------------------')
     print('Tareas por Codigo:')
     tareas_codigo = [codigo for codigo in dic_tareas if codigo['codigo'] == num ]
@@ -63,8 +64,8 @@ def lista_tareas_codigo(num):
     print('------------------------------------------')
     print()
 
-#funcion de filtrado por titulo
 def lista_tareas_titulo(titulo):
+    '''Funcion de filtrado por titulo'''
     print('------------------------------------------')
     print('Tareas por Título:')
     tareas_titulo =  list(filter(lambda tarea: tarea if titulo_seleccionado.capitalize() in tarea['titulo'].capitalize() else False,dic_tareas))
@@ -80,9 +81,8 @@ def lista_tareas_titulo(titulo):
     else:
         print('No se han encontrado tareas que coincidan.')
 
-#funcion de filtrado por fecha
 def lista_tareas_fecha():
-    
+    '''Funcion de filtrado por fecha'''
     tareas_fecha = [fecha for fecha in dic_tareas if fecha['fecha_de_creacion'] == fecha_seleccionada]
     for index,fecha in enumerate(tareas_fecha,1):
         print('------------------------------------------')
@@ -93,9 +93,8 @@ def lista_tareas_fecha():
     print('------------------------------------------')
     print()
 
-
-#funcion para validar que la fecha sea numerica 
 def ingresar_fecha():
+    '''Funcion para validar que la fecha sea numerica '''
     while True:
         
         dia = input("Ingrese el día:\n")
@@ -107,45 +106,44 @@ def ingresar_fecha():
         else:
             print("Alguno de los valores fue invalido, vuelva a ingresar los valores numéricos para día, mes y año.\n")
         
-#funcion para que el codigo no sea repetido
+
 def codigo_no_rep(codigo): 
+    '''Funcion para que el codigo no sea repetido'''
     for tarea in dic_tareas:
         if tarea['codigo'] == codigo:
             return False
     return True
     
-
-#funcion para que el titulo sea vacio
 def dato_no_vacio(titulo):
+    '''Funcion para que el titulo sea vacio'''
     if len(titulo.strip()) > 0 and len(titulo) <= 20:
         return True                 
     else:
         print ('El dato ingresado no es valido, vuelva a ingresar.\n')
 
-#funcion para validar que sea un numero
-
 def validar_numero(numero):
+    '''Funcion para validar que sea un numero'''
     return ' '.join(numero.split()).isdigit()
     
-    
-#funcion para verificar que la id no se repita
 def validar_codigo(codigo):
-
+    '''Funcion para verificar que la id no se repita'''
     if not validar_numero(codigo):
         return False, 'El codigo tiene que ser numerico.\n'
     if not codigo_no_rep(codigo):
         return False, 'El codigo ya esta en uso, ingrese otro diferente.\n'
     return True, None
 
-#funcion para verificar la descripcion
+
 def validar_desc(desc):
+    '''Funcion para verificar la descripcion'''
     if len(desc.strip()) > 0:
         return True
     else:
         print('La descripcion ingresada no puede estar vacia, vuelva a ingresar\n')
 
-#funcion para validar el status
+
 def validar_status(status):
+    '''Funcion para validar el status'''
     ver = False
     while ver == False: 
         ver = dato_no_vacio(status) 
@@ -156,9 +154,9 @@ def validar_status(status):
     return True
     
 
-#funcion para añadir tareas
+
 def añadir_tarea():
-    
+    '''Funcion para añadir tareas'''
     verificar_codigo = False
     while not verificar_codigo:
         codigo = input('Ingrese el codigo:\n')
@@ -193,25 +191,27 @@ def añadir_tarea():
     }
     
     dic_tareas.append(tareas)
-#funcion para ingresar el codigo para despues actualizar
-
     
 def ref_tarea(codigo_buscar, task_key_update, nueva_tarea):
+    '''Funcion para ingresar el codigo para despues actualizar'''
     for tarea in dic_tareas:
         if tarea['codigo'] == codigo_buscar:
             tarea[task_key_update] = nueva_tarea
             break
         
-#funcion para verificar que la tarea existe
-def existe_tarea(codigo_buscar):
-    if len(dic_tareas) > 0:
-        tarea_existe = [tarea for tarea in dic_tareas if tarea['codigo'] == codigo_buscar]
-        if tarea_existe is not None:
-            return True, 'Tarea encontrada.'
-    return False, 'Tarea no encontrada'
 
-#funcion para nuevo codigo
+def existe_tarea(codigo_buscar):
+    '''Funcion para verificar que la tarea existe'''
+    if len(dic_tareas) > 0:
+        for tarea in dic_tareas:
+            if tarea['codigo'] == codigo_buscar:
+                return True, 'Tarea encontrada'
+        return False, 'Tarea no encontrada'
+    return False
+    
+
 def nuevo_codigo(codigo_buscar):
+    '''Funcion para nuevo codigo'''
     verificar_nuevo_codigo = False
     while not verificar_nuevo_codigo:
         nuevo_codigo = input('Ingrese el nuevo codigo:\n')
@@ -222,8 +222,9 @@ def nuevo_codigo(codigo_buscar):
     map(ref_tarea(codigo_buscar,'codigo',nuevo_codigo),dic_tareas)
     print('El codigo fue actualizado.\n')
 
-#funcion para nuevo titulo
+
 def nuevo_titulo(codigo_buscar):
+    '''Funcion para nuevo titulo'''
     verificar_nuevo_titulo = False
     while not verificar_nuevo_titulo:
         nuevo_titulo = input('Ingrese el nuevo titulo:\n')
@@ -231,8 +232,8 @@ def nuevo_titulo(codigo_buscar):
     map(ref_tarea(codigo_buscar,'titulo',nuevo_titulo),dic_tareas)
     print('El titulo fue actualizado.\n')
     
-#funcion para nueva descripcion
 def nueva_desc(codigo_buscar):
+    '''Funcion para nueva descripcion'''
     verificar_nueva_desc = False
     while not verificar_nueva_desc:
         nueva_desc = input('Ingrese la nueva descripcion:\n')
@@ -240,8 +241,8 @@ def nueva_desc(codigo_buscar):
     map(ref_tarea(codigo_buscar,'descripcion',nueva_desc),dic_tareas)
     print('La descripcion fue actualizada.\n')
     
-#funcion para nuevo status
 def nuevo_status(codigo_buscar):
+    '''Funcion para nuevo status'''
     verificar_nuevo_status = False
     while not verificar_nuevo_status:
          nuevo_status = input('Ingrese nuevo status(completado o pendiente):\n')
@@ -249,59 +250,61 @@ def nuevo_status(codigo_buscar):
     map(ref_tarea(codigo_buscar,'status',nuevo_status),dic_tareas)
     print('El status fue actualizado.\n')  
 
-#funcion para nueva fecha
+
 def nueva_fecha(codigo_buscar):
+    '''Funcion para nueva fecha'''
     verificar_nueva_fecha = False
     while not verificar_nueva_fecha:
         verificar_nueva_fecha = ingresar_fecha()
     map(ref_tarea(codigo_buscar,'fecha',nueva_fecha),dic_tareas)
     print('La fecha fue actualizada.\n')        
 
-#funcion de menu para actualizar tareas
 def menu_actualizar_tarea(codigo_buscar):
-        encontrado, mensaje = existe_tarea(codigo_buscar)
-        if encontrado:
-            print(mensaje)
-        else:
-            print(mensaje)
+    '''Funcion de menu para actualizar tareas'''
+    encontrado, mensaje = existe_tarea(codigo_buscar)
+    if encontrado == True:
+        print(mensaje)
+    else:
+        print(mensaje)
+        
+    ejecutar=True    
+    while ejecutar and encontrado == True:
+        
+        print('------------------------------------------') 
+        print('1.- Actualizar codigo.')
+        print('2.- Actualizar titulo.')
+        print('3.- Actualizar descripcion.')
+        print('4.- Actualizar status.')
+        print('5.- Actualizar fecha.')
+        print('6.- Atras.')
+        selec_act = input('Seleccione una opcion: ')
+        match (selec_act):
             
-        ejecutar=True    
-        while ejecutar and encontrado == True:
+            case '1': 
+                print('------------------------------------------')
+                nuevo_codigo(codigo_buscar)
+            case '2': 
+                print('------------------------------------------')
+                nuevo_titulo(codigo_buscar)
+            case '3': 
+                print('------------------------------------------')
+                nueva_desc(codigo_buscar)
+            case '4': 
+                print('------------------------------------------')
+                nuevo_status(codigo_buscar)
+            case '5': 
+                print('------------------------------------------')
+                nueva_fecha(codigo_buscar)
+            case '6': 
+                    ejecutar = False 
+                    encontrado = False
+            case _ : 
+                    print('------------------------------------------')
+                    print('El dato ingresado no esta dentro de las opciones, ingrese otro:\n')
             
-            print('------------------------------------------') 
-            print('1.- Actualizar codigo.')
-            print('2.- Actualizar titulo.')
-            print('3.- Actualizar descripcion.')
-            print('4.- Actualizar status.')
-            print('5.- Actualizar fecha.')
-            print('6.- Atras.')
-            selec_act = input('Seleccione una opcion: ')
-            match (selec_act):
-                
-                case '1': 
-                    print('------------------------------------------')
-                    nuevo_codigo(codigo_buscar)
-                case '2': 
-                    print('------------------------------------------')
-                    nuevo_titulo(codigo_buscar)
-                case '3': 
-                    print('------------------------------------------')
-                    nueva_desc(codigo_buscar)
-                case '4': 
-                    print('------------------------------------------')
-                    nuevo_status(codigo_buscar)
-                case '5': 
-                    print('------------------------------------------')
-                    nueva_fecha(codigo_buscar)
-                case '6': 
-                        ejecutar = False 
-                        encontrado = False
-                case _ : 
-                        print('------------------------------------------')
-                        print('El dato ingresado no esta dentro de las opciones, ingrese otro:\n')
-            
-#funcion para actualizar tareas
+
 def actualizar_tarea():
+    '''Funcion para Actualizar Tareas'''
     verificar_codigo = False
     while not verificar_codigo:
         codigo_buscar = input('Ingrese el codigo de la tarea a actualizar: ')
@@ -310,7 +313,7 @@ def actualizar_tarea():
         menu_actualizar_tarea(codigo_buscar)
         
 def borrar_tareas():
-    
+    '''Funcion para Borrar Tareas'''
     verficar_codigo = False
     while not verficar_codigo:
         codigo_borrar = input('Ingrese el codigo de la tarea a eliminar:\n')
@@ -331,7 +334,7 @@ def borrar_tareas():
         print('No se encontro, vuelva a intentarlo.\n')
         
 while ciclo:
-    
+    '''Inicio del Programa'''
     esmanzana = True
     filtro = None
     seleccion = input('''
