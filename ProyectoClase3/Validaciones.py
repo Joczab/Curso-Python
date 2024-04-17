@@ -7,6 +7,7 @@ def no_vacio(text):
     while valor.strip() == '' or valor == '':
         print('El valor no puede estar vacio')
         valor = input(text)
+        
     return valor
 
 def entero_valido(text, not_text):
@@ -37,6 +38,14 @@ def flotante_valido(text, not_text):
 def finalizar():
     return print('\nFinalizado.\n')
 
+def mostrar_menu(opciones: list):
+    '''Funcion de mostrar menu'''
+    
+    opciones = [(f'Para {opcion['accion']}:{opcion['valor']}') for opcion in opciones]
+    
+    for opcion in opciones: 
+        print(opcion)        
+        
 def validar_opcion(opciones: list):
     ''' Funcion para validar las opciones'''
     opcion_selec = entero_valido('Que desea seleccionar?:\n', 'La opcion seleccionada debe ser un numero.\n')
@@ -46,11 +55,3 @@ def validar_opcion(opciones: list):
         opcion_selec = entero_valido('Que desea seleccionar?:\n', 'La opcion seleccionada debe ser un numero.\n')
     
     return int(opcion_selec)    
-
-def mostrar_menu(opciones: list):
-    '''Funcion de mostrar menu'''
-    
-    opciones = [(f'Para {opcion['accion']}:{opcion['valor']}\n') for opcion in opciones]
-    
-    for opcion in opciones: 
-        print(opcion)        

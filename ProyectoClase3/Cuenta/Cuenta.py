@@ -1,7 +1,7 @@
 class Cuenta:
-    def __init__(self,num_cuenta,saldo):
+    def __init__(self,account_id,saldo):
         
-        self.num_cuenta = num_cuenta
+        self.account_id = account_id
         self.saldo = saldo
         
     def depositar(self,saldo_agregado):  

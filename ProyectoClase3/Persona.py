@@ -1,10 +1,9 @@
 class Persona:
-    _cedula = None
-    
-    def __init__(self,name,lastname,cedula):
+
+    def __init__(self,nombre,apellido,cedula)-> None:
         
-        self.name = name    
-        self.lastname = lastname
+        self.nombre = nombre 
+        self.apellido = apellido
         self.cedula = cedula
 
     def set_nombre(self,nuevo_nombre):

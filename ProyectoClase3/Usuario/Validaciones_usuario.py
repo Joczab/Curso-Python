@@ -13,7 +13,7 @@ def validar_nombre():
 def validar_cedula(text):
     '''funcion para validar cedula'''
     cedula = entero_valido(text,'La cedula solo debe contener numeros.\n')
-    return int(cedula)
+    return cedula
 
 def validar_apellido():
     ''' Funcion para validar apellido'''
@@ -46,7 +46,7 @@ def crear_usuario():
     
     nombre = validar_nombre()
     apellido = validar_apellido()
-    cedula = validar_cedula()
+    cedula = validar_cedula('Cedula:\n')
     username = validar_username()
     contraseña = validar_contraseña()
     
@@ -56,8 +56,8 @@ def ingresar_usuario(usuarios: list[Usuario]):
     '''Funcion de ingresar usuario'''
     
     username = validar_username()
-    contraseña = validar_username()
+    contraseña = validar_contraseña()
     
     validar_usuario = [usuario for usuario in usuarios if username == usuario.username and usuario.validar_contraseña(contraseña) is True]
     
-    return validar_usuario    
+    return validar_usuario

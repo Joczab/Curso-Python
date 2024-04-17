@@ -2,17 +2,18 @@ from Cuenta.Cuenta import Cuenta
 from Cuenta.Validaciones_de_cuenta import random_acount_number, saldo_inicial,valid_account
 from Usuario.Validaciones_usuario import crear_usuario, ingresar_usuario, validar_cedula
 from Usuario.Usuario import Usuario
-from Validaciones import mostrar_menu, validar_opcion
+from Validaciones import finalizar, mostrar_menu, validar_opcion
 
 
 class SistemaBancario:
+    
     '''Clase de sistema bancario'''
     def __init__(self,usuarios : list[Usuario], sesion: Usuario = None):
         self.usuarios = usuarios
         self.sesion = sesion
     
     def main(self):
-        '''Funciones principales'''
+        '''Funcion principal'''
         opciones = [
             {"accion": "Crea tu usuario", "valor": "1"},
             {"accion": "Iniciar sesión", "valor": "2"},
@@ -22,14 +23,14 @@ class SistemaBancario:
         is_not_exit = True
         
         while is_not_exit:
-            print('Elija una opcion:\n')
+            print('Elija una opcion:')
             mostrar_menu(opciones)
             
             opcion_selec = validar_opcion(opciones)
             
             if opcion_selec == 1:
-                nuevo_usuario = crear_usuario()
                 
+                nuevo_usuario = crear_usuario()
                 usuario_existe = [usuario for usuario in self.usuarios if nuevo_usuario.username == usuario.username or nuevo_usuario.cedula == usuario.cedula]
             
                 if len(usuario_existe)>0:
@@ -42,6 +43,9 @@ class SistemaBancario:
                 
                 if self.sesion is not None:
                     self.menu_usuario()
+            elif opcion_selec == 3:
+                finalizar()
+                break
                     
     def iniciar_sesion(self):
         '''Funcion de iniciar sesion'''
@@ -64,6 +68,7 @@ class SistemaBancario:
         is_not_back = True
         
         while is_not_back:
+            
             print("Elija una opcion:\n")
             mostrar_menu(opciones)
             
@@ -142,7 +147,7 @@ class SistemaBancario:
                 print('La cedula proporcionada no pertenece a ningun usuario, intente con otra cedula.\n')
                 cedula = validar_cedula('Cedula de la persona a transferir:\n')
             
-            usuario_a_transferir = [usuario for usuario in self.usuario if usuario.cedula == cedula]
+            usuario_a_transferir = [usuario for usuario in self.usuarios if usuario.cedula == cedula]
             
             print(f'Datos del usuario con cedula:{cedula}')
             print(f'Numero de cuenta: {usuario_a_transferir[0].cuentas[0].account_id}')
@@ -156,7 +161,7 @@ class SistemaBancario:
                 
                 saldo = saldo_inicial('Saldo a transferir.\n')
                 
-                if saldo_inicial > usuario.cuentas[0].saldo:
+                if saldo > usuario.cuentas[0].saldo:
                     print('Fondos insuficientes.\n')
                 else:
                     usuario_a_transferir[0].cuentas[0].depositar(saldo)
